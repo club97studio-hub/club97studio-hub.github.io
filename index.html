@@ -31,10 +31,10 @@ h1{font:800 clamp(2.6rem,5.6vw,4.9rem)/1.02 var(--d);letter-spacing:-.04em}
 .lead{margin:26px 0 34px;max-width:30em;font-size:1.2rem;color:#E4DCFF}
 .btn{display:inline-block;background:var(--y);color:var(--ink);font:700 1.05rem var(--b);padding:17px 30px;border-radius:999px;border:3px solid var(--ink);box-shadow:5px 5px 0 var(--ink);text-decoration:none;transition:transform .15s,box-shadow .15s}
 .btn:hover{transform:translate(3px,3px);box-shadow:2px 2px 0 var(--ink)}
-.stage{position:relative}
-.ba{--p:50%;position:relative;aspect-ratio:4/3;overflow:hidden;background:#fff;transform:rotate(-2.5deg);touch-action:pan-y;user-select:none}
+.stage{position:relative;width:100%;max-width:470px;justify-self:center}.stage .ba{transform:rotate(-2.5deg)}
+.ba{--p:50%;position:relative;aspect-ratio:930/1166;overflow:hidden;background:#fff;touch-action:pan-y;user-select:none}
 .ba svg{position:absolute;inset:0;width:100%;height:100%;display:block}
-.ba .before{clip-path:inset(0 calc(100% - var(--p)) 0 0)}
+.layer{position:absolute;inset:0}.ba img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}.ba .before{clip-path:inset(0 calc(100% - var(--p)) 0 0)}
 .ba .bar{position:absolute;top:0;bottom:0;left:var(--p);width:4px;margin-left:-2px;background:var(--ink);pointer-events:none}
 .ba .bar::after{content:"";position:absolute;top:50%;left:50%;width:48px;height:48px;margin:-24px;border-radius:50%;background:var(--y);border:3px solid var(--ink)}
 .ba input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:ew-resize;margin:0}
@@ -71,10 +71,21 @@ h3{font:700 1.5rem/1.15 var(--d);letter-spacing:-.03em;margin-bottom:14px}
 .steps b{display:block;font:700 1.25rem var(--d);margin-bottom:8px;letter-spacing:-.02em}
 
 /* work */
-.work{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:52px}
-.work figure{aspect-ratio:1;display:grid;place-items:center;text-align:center;padding:24px;font-weight:700}
-.work figure:nth-child(1){background:var(--y)}.work figure:nth-child(2){background:#C9B8FF}.work figure:nth-child(3){background:#FFB7A5}
-.work img{width:100%;height:100%;object-fit:cover;border-radius:20px}
+.filters{display:flex;flex-wrap:wrap;gap:10px;margin-top:36px}
+.filters button{font:700 .95rem var(--b);padding:9px 18px;border-radius:999px;border:3px solid var(--ink);background:var(--w);color:var(--ink);cursor:pointer}
+.filters button[aria-pressed=true]{background:var(--ink);color:#fff}
+.work{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:28px;margin-top:32px}
+.tile{padding:14px;background:var(--w)}
+.tile .ba{border-radius:14px;border:2px solid var(--ink)}
+.tile .tag{top:8px;font-size:.7rem;padding:3px 9px}.tile .tag.l{left:8px}.tile .tag.r{right:8px}
+.tile .ba .bar::after{width:34px;height:34px;margin:-17px}
+.tile p{margin-top:10px;font-weight:700}
+.aplus{background:var(--y);border-block:3px solid var(--ink)}
+.ap{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-top:44px;max-width:880px}
+.ap figure{background:var(--w);padding:14px}
+.scroll{height:560px;overflow-y:auto;border-radius:14px;border:2px solid var(--ink)}
+.scroll img{display:block;width:100%}
+.ap figcaption{margin-top:10px;font-weight:700}
 
 /* pricing */
 .price-sec{background:#C9B8FF}
@@ -95,7 +106,7 @@ footer{padding:0 0 44px;font-weight:500}
 
 @media (max-width:900px){
   .hero{grid-template-columns:1fr;gap:56px;padding-bottom:84px}
-  .svc,.steps,.work{grid-template-columns:1fr}
+  .svc,.steps,.ap{grid-template-columns:1fr}
   .plans{grid-template-columns:1fr 1fr}
   .cta{padding:44px 26px}
   nav a:not(:last-child){display:none}
@@ -104,22 +115,6 @@ footer{padding:0 0 44px;font-weight:500}
 </style>
 </head>
 <body>
-
-<svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <defs>
-    <g id="bottle">
-      <rect x="168" y="52" width="64" height="38" rx="6" fill="#20242C"/>
-      <rect x="182" y="86" width="36" height="16" fill="#9CA3B0"/>
-      <rect x="132" y="100" width="136" height="150" rx="18" fill="#D9DEE8"/>
-      <rect x="132" y="100" width="136" height="150" rx="18" fill="none" stroke="#5B2EFF" stroke-width="2" opacity=".5"/>
-      <rect x="150" y="116" width="14" height="118" rx="7" fill="#fff" opacity=".75"/>
-      <rect x="176" y="160" width="76" height="40" rx="4" fill="#14102B"/>
-      <rect x="186" y="172" width="44" height="5" fill="#fff"/><rect x="186" y="183" width="30" height="5" fill="#fff" opacity=".6"/>
-    </g>
-    <radialGradient id="vig" cx="50%" cy="45%" r="75%"><stop offset=".5" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#5a4f3e" stop-opacity=".45"/></radialGradient>
-    <filter id="soft"><feGaussianBlur stdDeviation="7"/></filter>
-  </defs>
-</svg>
 
 <div class="top">
   <header>
@@ -136,25 +131,10 @@ footer{padding:0 0 44px;font-weight:500}
         <a class="btn" href="#contact">Get a free sample</a>
       </div>
 
-      <!-- HERO DEMO: to use your own photos, replace the two <svg> layers with
-           <img class="before" src="before.jpg" alt="Before"> and <img class="after" src="after.jpg" alt="After">
-           (same size, 4:3) and add ".ba img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}" to the CSS. -->
       <div class="stage">
         <div class="ba box" id="ba" role="group" aria-label="Before and after photo editing comparison">
-          <svg class="after" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-            <rect width="400" height="300" fill="#fff"/>
-            <ellipse cx="200" cy="258" rx="92" ry="9" fill="#14102B" opacity=".16" filter="url(#soft)"/>
-            <use href="#bottle"/>
-          </svg>
-          <svg class="before" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-            <rect width="400" height="300" fill="#CFC5B4"/>
-            <rect width="400" height="300" fill="url(#vig)"/>
-            <path d="M0 215 L400 190" stroke="#B8AD99" stroke-width="3"/>
-            <ellipse cx="214" cy="256" rx="118" ry="16" fill="#3a3326" opacity=".35" filter="url(#soft)"/>
-            <use href="#bottle" opacity=".9"/>
-            <path d="M140 235 q30 -10 70 -4" stroke="#8b8372" stroke-width="2" fill="none"/>
-            <g fill="#6e6554"><circle cx="64" cy="70" r="2.4"/><circle cx="318" cy="52" r="3"/><circle cx="96" cy="190" r="2"/><circle cx="332" cy="150" r="2.6"/><circle cx="286" cy="236" r="2"/><circle cx="52" cy="248" r="3"/></g>
-          </svg>
+          <img class="after" src="img/hero-after.jpg" alt="Watch after editing: clean white background">
+          <img class="before" src="img/hero-before.jpg" alt="Watch before editing: grey backdrop and plastic holder">
           <div class="bar"></div>
           <span class="tag l">Before</span><span class="tag r">After</span>
           <input type="range" min="0" max="100" value="50" aria-label="Drag to compare before and after">
@@ -206,12 +186,19 @@ footer{padding:0 0 44px;font-weight:500}
   <section id="work">
     <div class="wrap">
       <h2>Selected work</h2>
-      <p class="sub">Before and after, from raw studio shots to finished images.</p>
-      <div class="work">
-        <!-- Replace each <figure> with: <img class="box" src="work-1.jpg" alt="Describe the product, before and after"> -->
-        <figure class="box">Add a before/after image here</figure>
-        <figure class="box">Add a before/after image here</figure>
-        <figure class="box">Add a listing image here</figure>
+      <p class="sub">Drag each slider to compare the raw studio shot with the finished image.</p>
+      <div class="filters" id="filters" role="group" aria-label="Filter by category"></div>
+      <div class="work" id="grid"></div>
+    </div>
+  </section>
+
+  <section class="aplus" id="listings">
+    <div class="wrap">
+      <h2>Listing images and A+ Content</h2>
+      <p class="sub">Full A+ Content pages built to Amazon’s guidelines. Scroll inside each frame to see the whole page.</p>
+      <div class="ap">
+        <figure class="box"><div class="scroll" tabindex="0" role="region" aria-label="A+ Content example: furniture"><img src="img/aplus-furniture.jpg" alt="A+ Content page for a nightstand" loading="lazy"></div><figcaption>Furniture</figcaption></figure>
+        <figure class="box"><div class="scroll" tabindex="0" role="region" aria-label="A+ Content example: kids outdoor"><img src="img/aplus-kids.jpg" alt="A+ Content page for a kids picnic table" loading="lazy"></div><figcaption>Kids and outdoor</figcaption></figure>
       </div>
     </div>
   </section>
@@ -246,15 +233,33 @@ footer{padding:0 0 44px;font-weight:500}
 
 <script>
 (function(){
-  var ba=document.getElementById('ba'),r=ba.querySelector('input');
-  function set(v){ba.style.setProperty('--p',v+'%');r.value=v}
-  r.addEventListener('input',function(){set(r.value)});
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function wire(ba){var r=ba.querySelector('input');function set(v){ba.style.setProperty('--p',v+'%');r.value=v}r.addEventListener('input',function(){set(r.value)});return set}
   document.getElementById('y').textContent=new Date().getFullYear();
-  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){return}
-  var t0=null,stop=false,from=92,to=50;
-  function step(t){if(stop)return;if(!t0)t0=t;var k=Math.min((t-t0)/1100,1),e=1-Math.pow(1-k,3);set(from+(to-from)*e);if(k<1)requestAnimationFrame(step)}
-  set(from);requestAnimationFrame(step);
-  r.addEventListener('pointerdown',function(){stop=true},{once:true});
+
+  var hero=document.getElementById('ba'),setHero=wire(hero),stop=false;
+  if(!reduce){
+    var t0=null;
+    (function step(t){if(stop)return;if(!t0)t0=t||0;var k=Math.min(((t||0)-t0)/1100,1),e=1-Math.pow(1-k,3);setHero(92+(50-92)*e);if(k<1)requestAnimationFrame(step)})(0);
+    hero.querySelector('input').addEventListener('pointerdown',function(){stop=true},{once:true});
+  }
+
+  var items=[['watches-1','Watches','Watch'],['bags-1','Bags','Bag'],['bags-2','Bags','Bag'],['eyeglass-1','Eyeglasses','Eyeglasses'],['eyeglass-2','Eyeglasses','Eyeglasses'],['fashion-1','Fashion','Fashion model'],['fashion-2','Fashion','Kids fashion'],['jewelry-1','Jewelry','Jewelry'],['jewelry-2','Jewelry','Jewelry']];
+  var grid=document.getElementById('grid'),tiles=[];
+  items.forEach(function(it){
+    var f=document.createElement('figure');f.className='box tile';
+    f.innerHTML='<div class="ba"><img class="after" src="img/'+it[0]+'-after.jpg" alt="'+it[2]+' after editing" loading="lazy"><img class="before" src="img/'+it[0]+'-before.jpg" alt="'+it[2]+' before editing" loading="lazy"><div class="bar"></div><span class="tag l">Before</span><span class="tag r">After</span><input type="range" min="0" max="100" value="50" aria-label="Drag to compare '+it[2]+' before and after"></div><p>'+it[2]+'</p>';
+    grid.appendChild(f);wire(f.firstChild);tiles.push([f,it[1]]);
+  });
+  var fb=document.getElementById('filters');
+  ['All','Watches','Bags','Eyeglasses','Fashion','Jewelry'].forEach(function(c,i){
+    var b=document.createElement('button');b.type='button';b.textContent=c;b.setAttribute('aria-pressed',i===0);
+    b.addEventListener('click',function(){
+      Array.prototype.forEach.call(fb.children,function(x){x.setAttribute('aria-pressed',x===b)});
+      tiles.forEach(function(t){t[0].hidden=!(c==='All'||t[1]===c)});
+    });
+    fb.appendChild(b);
+  });
 })();
 </script>
 </body>
